@@ -165,14 +165,3 @@ class ImageResizer{
 	}
 
 }
-
-
-$imageResizer=new ImageResizer();
-$dir_files=scandir('source');
-foreach($dir_files as $file){
-	$extention=substr($file,-4);
-	if($extention==='.jpg' || $extention==='jpeg'){
-		$imageResizer->resize($file);
-		echo $file."\n";
-	}
-}
