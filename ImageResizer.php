@@ -33,12 +33,7 @@ class ImageResizer{
 
 		$this->img_resize($buffer,array($this->_new_width,$this->_new_height),'target/'.$source_file,90,65,$bgcolor);
 
-		/*$line_color=imagecolorallocate($this->_source_img,255,0,0);
-		imageline($this->_source_img,$this->_left,$this->_top,$this->_right,$this->_top,$line_color);
-		imageline($this->_source_img,$this->_right,$this->_top,$this->_right,$this->_bottom,$line_color);
-		imageline($this->_source_img,$this->_left,$this->_bottom,$this->_right,$this->_bottom,$line_color);
-		imageline($this->_source_img,$this->_left,$this->_top,$this->_left,$this->_bottom,$line_color);
-		imagejpeg($this->_source_img,'__'.$source_file,100);*/
+	
 		imagedestroy($this->_source_img);
 		imagedestroy($buffer);
 	}
