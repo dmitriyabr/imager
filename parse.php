@@ -10,11 +10,25 @@
 const XML_FILE_NAME='ymarket.xml';
 const PICTURES_XPATH='//offer/picture';
 const PATH_START=43;
+const TEMP_IMAGE_FILE='temp.jpg';
 
 $xml=new SimpleXMLElement(file_get_contents(XML_FILE_NAME));
 
-$count=array();
+$count=0;
 foreach($xml->xpath(PICTURES_XPATH) as $picture){
-    $path=substr($picture, PATH_START);
-    echo $path,"\n";
+    $count++;
+    if($count<-5){
+
+        echo '.';
+        $path=substr($picture, PATH_START);
+        $directory=dirname($path);
+        if(!file_exists($directory)){
+            mkdir($directory,0777,true);
+        }
+        passthru("wget $picture -O ".TEMP_IMAGE_FILE.' > /dev/null');
+        passthru('php resize_target_image.php "'.TEMP_IMAGE_FILE.'" "'.$path.'" 500 500');
+    }
 }
+
+
+echo "$count\n\n";

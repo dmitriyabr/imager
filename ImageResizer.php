@@ -44,10 +44,10 @@ class ImageResizer{
             );
         }
         else{
-            if(!is_null($target_width)){
+            if(is_null($target_width)){
                 $target_width=$real_width;
             }
-            if(!is_null($target_height)){
+            if(is_null($target_height)){
                 $target_height=$real_height;
             }
 
@@ -115,7 +115,7 @@ class ImageResizer{
                 break;
             }
         }
-        $this->_top=min($this->_top,self::VERTICAL_OFFSET);
+        $this->_top=max($this->_top,self::VERTICAL_OFFSET);
 
 
         $this->_bottom=null;
@@ -131,7 +131,7 @@ class ImageResizer{
                 break;
             }
         }
-        $this->_bottom=max($this->_bottom,$this->_start_size[1]-self::VERTICAL_OFFSET);
+        $this->_bottom=min($this->_bottom,$this->_start_size[1]-self::VERTICAL_OFFSET);
 
 
         $this->_left=null;
@@ -147,7 +147,7 @@ class ImageResizer{
                 break;
             }
         }
-        $this->_left=min($this->_left,self::HORIZONTAL_OFFSET);
+        $this->_left=max($this->_left,self::HORIZONTAL_OFFSET);
 
 
         $this->_right=null;
@@ -163,7 +163,7 @@ class ImageResizer{
                 break;
             }
         }
-        $this->_right=max($this->_right,$this->_start_size[0]-self::HORIZONTAL_OFFSET);
+        $this->_right=min($this->_right,$this->_start_size[0]-self::HORIZONTAL_OFFSET);
     }
 
 
@@ -171,10 +171,10 @@ class ImageResizer{
     private function isNotABackGround($cur_color){
         foreach($this->_color_borders as $chanel_name => $chanel){
             if($chanel['max']<$cur_color[$chanel_name] || $cur_color[$chanel_name]<$chanel['min']){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 
