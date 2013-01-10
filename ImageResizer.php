@@ -13,10 +13,12 @@ class ImageResizer{
     private $_bottom;
     private $_left;
     private $_right;
+    private $bg_color;
     const VERTICAL_OFFSET=10;
     const HORIZONTAL_OFFSET=10;
 
-    public function __construct($source_file){
+    public function __construct($source_file, $bg_color=null){
+        $this->bg_color=$bg_color;
         $this->_start_size = getimagesize($source_file);
         $this->_source_img=imagecreatefromjpeg($source_file);
         $this->getColorBorders();
@@ -178,11 +180,15 @@ class ImageResizer{
     }
 
 
-    private function getBgChanel($cnannel_name){
-        return ($this->_color_borders[$cnannel_name]['max']+$this->_color_borders[$cnannel_name]['min'])/2;
+    private function getBgChanel($channel_name){
+        if(!is_null($this->bg_color) && isset($this->bg_color[$channel_name])){
+            return $this->bg_color[$channel_name];
+        }
+        return ($this->_color_borders[$channel_name]['max']+$this->_color_borders[$channel_name]['min'])/2;
     }
 
     private function getBgColor($buffer){
+
         return imagecolorallocate(
             $buffer,
             $this->getBgChanel('red'),
