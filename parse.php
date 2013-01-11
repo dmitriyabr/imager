@@ -15,10 +15,7 @@ const EXPORT_PATH='/data/';
 
 $xml=new SimpleXMLElement(file_get_contents(XML_FILE_NAME));
 
-$count=0;
 foreach($xml->xpath(PICTURES_XPATH) as $picture){
-    $count++;
-    if($count<-5){
 
         echo '.';
         $path=substr($picture, PATH_START);
@@ -26,10 +23,10 @@ foreach($xml->xpath(PICTURES_XPATH) as $picture){
         if(!file_exists($directory)){
             mkdir($directory,0777,true);
         }
-        passthru("wget $picture -O ".TEMP_IMAGE_FILE.' > /dev/null');
-        passthru('php resize_target_image.php "'.TEMP_IMAGE_FILE.'" "'.EXPORT_PATH.$path.'" 500 500');
+        exec("wget $picture -O ".TEMP_IMAGE_FILE.' > /dev/null');
+        exec('php resize_target_image.php "'.TEMP_IMAGE_FILE.'" "'.EXPORT_PATH.$path.'" 500 500');
+        echo '.';
     }
 }
 
 
-echo "$count\n\n";
