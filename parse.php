@@ -26,7 +26,7 @@ foreach($xml->xpath(PICTURES_XPATH) as $picture){
         exec("wget $picture -O ".TEMP_IMAGE_FILE.' > /dev/null');
         exec('php resize_target_image.php "'.TEMP_IMAGE_FILE.'" "'.EXPORT_PATH.$path.'" 500 500');
         echo '.';
-    }
+    
 }
 
 
