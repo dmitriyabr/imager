@@ -48,7 +48,7 @@ class NeedToBeRefactored{
         $directory=dir($dirname);
 
         while (false !== ($info = $directory->read())) {
-            if(substr($info,-4)!=='.info'){
+            if(substr($info,-4)!=='.inf'){
                 echo '.';
                 continue;
             }
