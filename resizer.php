@@ -39,7 +39,7 @@ class NeedToBeRefactored{
 
 
     private function cleanup(){
-        unlink($this->cfg['TMP_INFO_PATH'].$this->current,'l');
+        unlink($this->cfg['TMP_INFO_PATH'].$this->current.'l');
         unlink($this->cfg['TMP_IMAGE_PATH'].substr($this->current,0,-3).'jpg');
     }
 

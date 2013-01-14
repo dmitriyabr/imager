@@ -19,4 +19,5 @@ $config=parse_ini_file('config.ini');
         $mtime=filemtime($tmp_img);
         file_put_contents($tmp_info,$path."\n".$mtime);
         $counter++;
+        echo "$counter\n";
     }
