@@ -62,6 +62,7 @@ class NeedToBeRefactored{
             }
             $this->savePictureMTime();
             $this->resize();
+            echo "resized ".$this->current."\n";
             $this->cleanup();
         }
     }
