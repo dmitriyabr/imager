@@ -118,7 +118,7 @@ class NeedToBeRefactored{
      {
          if(is_null($this->saveMTimeCommand)){
              $this->saveMTimeCommand=$this->pdo->prepare(
-                 'INSERT INTO textro.image_resizer_pictures (path, mtime)
+                 'INSERT INTO image_resizer_pictures (path, mtime)
                  VALUES (:path, :mtime)
                  ON DUPLICATE KEY UPDATE mtime=:mtime'
              );
@@ -133,7 +133,7 @@ class NeedToBeRefactored{
 
          if(is_null($this->getMTimeCommand)){
              $this->getMTimeCommand=$this->pdo->prepare(
-                 'SELECT mtime FROM textro.image_resizer_pictures
+                 'SELECT mtime FROM image_resizer_pictures
                   WHERE path=:path'
              );
          }
