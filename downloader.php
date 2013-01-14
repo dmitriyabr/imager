@@ -17,6 +17,6 @@ $config=parse_ini_file('config.ini');
         exec("wget $picture -O $tmp_img -o /dev/null");
         $path=substr($picture, $config['PATH_START']);
         $mtime=filemtime($tmp_img);
-        file_put_contents($tmp_info,$path,"\n",$mtime);
+        file_put_contents($tmp_info,$path."\n".$mtime);
         $counter++;
     }
