@@ -20,9 +20,11 @@ foreach($xml->xpath(PICTURES_XPATH) as $picture){
         echo '.';
         $path=substr($picture, PATH_START);
         $directory=dirname($path);
-        if(!file_exists($directory)){
-                exec('mkdir -p '.$directory);
-            //mkdir($directory,0777,true);
+        if(!file_exists(EXPORT_PATH.$directory)){
+
+            //    exec('mkdir -p '.EXPORT_PATH.$directory);
+            mkdir(EXPORT_PATH.$directory,0777,true);
+		echo EXPORT_PATH.$directory,"\n";
         }
         exec("wget $picture -O ".TEMP_IMAGE_FILE.' > /dev/null');
         exec('php resize_target_image.php "'.TEMP_IMAGE_FILE.'" "'.EXPORT_PATH.$path.'" 500 500');
