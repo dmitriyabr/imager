@@ -49,10 +49,12 @@ class NeedToBeRefactored{
 
         while (false !== ($info = $directory->read())) {
             if(substr($info,-4)!=='.info'){
+                echo '.';
                 continue;
             }
             $this->current=$info;
             if(!$this->lock()){
+                echo ',';
                 continue;
             }
             $this->parseImageData();
