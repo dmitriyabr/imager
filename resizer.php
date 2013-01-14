@@ -49,16 +49,14 @@ class NeedToBeRefactored{
 
         while (false !== ($info = $directory->read())) {
             if(substr($info,-4)!=='.inf'){
-                echo '.';
                 continue;
             }
             $this->current=$info;
             if(!$this->lock()){
-                echo ',';
                 continue;
             }
             $this->parseImageData();
-            if($this->pictureHasChanged()){
+            if(!$this->pictureHasChanged()){
                 $this->cleanup();
                 continue;
             }
