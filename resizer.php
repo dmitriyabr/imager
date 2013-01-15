@@ -7,13 +7,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-$config=parse_ini_file('config.ini');
-
-$main=new NeedToBeRefactored($config);
-
-while(true){
-    $main->iterateThrougDirectory($config['TMP_INFO_PATH']);
-}
 
 
 class NeedToBeRefactored{
@@ -44,7 +37,7 @@ class NeedToBeRefactored{
         unlink($this->cfg['TMP_IMAGE_PATH'].substr($this->current,0,-3).'jpg');
     }
 
-    public function iterateThrougDirectory($dirname)
+    public function iterateThroughDirectory($dirname)
     {
         $directory=dir($dirname);
 
@@ -148,4 +141,13 @@ class NeedToBeRefactored{
      }
 
 
+}
+
+
+$config=parse_ini_file('config.ini');
+
+$main=new NeedToBeRefactored($config);
+
+while(true){
+    $main->iterateThroughDirectory($config['TMP_INFO_PATH']);
 }
