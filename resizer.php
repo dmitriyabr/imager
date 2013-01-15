@@ -96,11 +96,8 @@ class NeedToBeRefactored{
 
     private function resize()
     {
-        $from=$this->getSourceImageName();
-        $to=$this->getTargetImageName();
-        $w=$this->cfg['TARGET_WIDTH'];
-        $h=$this->cfg['TARGET_HEIGHT'];
-        exec("php resize_target_image.php \"$from\" \"$to\" $w $h");
+        $ir=new ImageResizer($this->getSourceImageName(),array('red'=>255,'green'=>255,'blue'=>255));
+        $ir->resizeAndSave($this->getTargetImageName(),$this->cfg['TARGET_WIDTH'],$this->cfg['TARGET_HEIGHT']);
     }
 
     private function pictureHasChanged()
