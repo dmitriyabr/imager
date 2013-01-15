@@ -31,7 +31,8 @@ class NeedToBeRefactored{
         $this->pdo=new PDO(
             $this->cfg['DB_DSN'],
             $this->cfg['DB_USER'],
-            $this->cfg['DB_PASSWORD']
+            $this->cfg['DB_PASSWORD'],
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
         );
 
     }
