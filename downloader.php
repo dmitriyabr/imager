@@ -7,23 +7,38 @@
  * To change this template use File | Settings | File Templates.
  */
 
+$staring_counter=0;
+if(isset($argv[1])){
+    $staring_counter=intval($argv[1]);
+}
+
+
+$pass_count=0;
+if(isset($argv[2])){
+    $pass_count=intval($argv[2]);
+}
 $config=parse_ini_file('config.ini');
 
 $paths=array();
-    $xml=new SimpleXMLElement(file_get_contents($config['XML_FILE_NAME']));
-    $counter=0;
-    foreach($xml->xpath($config['PICTURES_XPATH']) as $picture){
-        $tmp_img=$config['TMP_IMAGE_PATH'].$counter.'.jpg';
-        $tmp_info=$config['TMP_INFO_PATH'].$counter.'.inf';
+$xml=new SimpleXMLElement(file_get_contents($config['XML_FILE_NAME']));
+$counter=$staring_counter;
 
-        $path=substr($picture, $config['PATH_START']);
-        if(isset($paths[$path])){
-            continue;
-        }
-        $paths[$path]=true;
-        exec("wget $picture -O $tmp_img -o /dev/null");
-        $mtime=filemtime($tmp_img);
-        file_put_contents($tmp_info,$path."\n".$mtime);
+foreach($xml->xpath($config['PICTURES_XPATH']) as $picture){
+    if($counter<$staring_counter+$pass_count){
         $counter++;
-        echo "$counter\n";
+        continue;
     }
+    $tmp_img=$config['TMP_IMAGE_PATH'].$counter.'.jpg';
+    $tmp_info=$config['TMP_INFO_PATH'].$counter.'.inf';
+
+    $path=substr($picture, $config['PATH_START']);
+    if(isset($paths[$path])){
+        continue;
+    }
+    $paths[$path]=true;
+    exec("wget $picture -O $tmp_img -o /dev/null");
+    $mtime=filemtime($tmp_img);
+    file_put_contents($tmp_info,$path."\n".$mtime);
+    $counter++;
+    echo "$counter\n";
+}
