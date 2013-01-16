@@ -71,7 +71,8 @@ class PictureIterator {
 
     private function lock()
     {
-        return rename($this->getInfoName(),$this->getLockedInfoName());
+        @ $result =rename($this->getInfoName(),$this->getLockedInfoName());
+        return $result;
     }
 
 
