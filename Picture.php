@@ -46,9 +46,9 @@ class Picture {
            DB::setMTime($this->path, $this->mtime);
         }
         else{
-            echo 's';
+            echo 'coud n\'t save an image';
         }
-        echo 'S';
+        echo 'Saved ';
     }
 
 
@@ -68,16 +68,16 @@ class Picture {
         $mtime=intval(trim(fgets($fp)));
         fclose($fp);
         if($mtime<=DB::getMTime($path)){
-            echo 'm';
+            echo 'already up to date';
             return false;
         }
 
         $image=imagecreatefromjpeg($source);
         if($image===false){
-            echo 'i';
+            echo 'could n\'t read an image' ;
             return false;
         }
-        echo 'P';
+        echo 'Read ';
         return new Picture($image, $path, $mtime);
 
     }

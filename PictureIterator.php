@@ -35,14 +35,14 @@ class PictureIterator {
             echo "\n",$counter, " $info : ";
             $this->info=$info;
             if(!$this->lock()){
-                echo 'l';
+                echo 'locked';
                 continue;
             }
             $picture=Picture::createFromInfo($this->getLockedInfoName(), $this->getPictureSource());
             if($picture!==false){
                 $picture=$this->resizer->resize($picture);
                 $picture->save(Cfg::EXPORT_PATH());
-                echo "O";
+                echo "OK";
             }
             $this->cleanup();
         }
