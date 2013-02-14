@@ -46,7 +46,7 @@ class Picture {
            DB::setMTime($this->path, $this->mtime);
         }
         else{
-            echo 'coud n\'t save an image';
+            echo 'coud n\'t save an image to '.$whole_path;
         }
         echo 'Saved ';
     }
