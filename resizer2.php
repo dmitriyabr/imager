@@ -19,6 +19,11 @@ function resize_recursive($dir_name,$rs, $config){
         if(is_dir($whole_path))
             resize_recursive($whole_path, $rs, $config);
         elseif(is_file($whole_path) && (substr($inner,-4)==='.jpg'||substr($inner,-5)==='.jpeg')){
+            if(file_exists(str_replace($config['SOURCE_DIR'],$config['TARGET_DIR'],$whole_path))){
+                echo 'e ';
+                continue;
+            }
+
             $pic=new Picture(imagecreatefromjpeg($whole_path),str_replace($config['SOURCE_DIR'],'',$whole_path),0);
             $rs->resize($pic)->save($config['TARGET_DIR'], false);
 
