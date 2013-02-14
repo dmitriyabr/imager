@@ -33,7 +33,7 @@ class Picture {
         );
     }
 
-    public function save($root_directory)
+    public function save($root_directory, $save_mtime=true)
     {
         $whole_path=$root_directory.$this->path;
 
@@ -42,7 +42,7 @@ class Picture {
 
             mkdir($directory,0777,true);
         }
-        if(imagejpeg($this->image,$whole_path , 100)){
+        if(imagejpeg($this->image,$whole_path , 100) && $save_mtime){
            DB::setMTime($this->path, $this->mtime);
         }
         else{
