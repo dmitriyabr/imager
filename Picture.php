@@ -42,13 +42,15 @@ class Picture {
 
             mkdir($directory,0777,true);
         }
-        if(imagejpeg($this->image,$whole_path , 100) && $save_mtime){
-           DB::setMTime($this->path, $this->mtime);
+        if(imagejpeg($this->image,$whole_path , 100)){
+
+            echo 'Saved ';
+            if($save_mtime)
+                DB::setMTime($this->path, $this->mtime);
         }
         else{
             echo 'coud n\'t save an image to '.$whole_path;
         }
-        echo 'Saved ';
     }
 
 
