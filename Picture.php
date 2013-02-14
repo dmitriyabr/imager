@@ -44,7 +44,7 @@ class Picture {
         }
         if(imagejpeg($this->image,$whole_path , 100)){
 
-            echo 'Saved ';
+            echo 'Saved to '.$whole_path,"\n";
             if($save_mtime)
                 DB::setMTime($this->path, $this->mtime);
         }
