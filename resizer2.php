@@ -40,12 +40,14 @@ function resize_recursive($dir_name,$rs, $config){
 
 $config=parse_ini_file('config2.ini');
 
-ini_set('error_log',$config['ERROR_LOG']);
+ini_set('error_log',$config['LOG_DIR'].date('Y-m-d').'_error.log');
 fclose(STDIN);
 fclose(STDOUT);
 fclose(STDERR);
 $STDIN = fopen('/dev/null', 'r');
-$STDOUT = fopen($config['APPLICATION_LOG'], 'ab');
-$STDERR = fopen($config['STDERR_LOG'], 'ab');
+$STDOUT = fopen($config['LOG_DIR'].date('Y-m-d').'.log', 'ab');
+$STDERR = fopen($config['LOG_DIR'].date('Y-m-d').'_stderror.log', 'ab');
+echo 'Started at '.date('Y-m-d H:i:s')."\n";
 $rs=new Resizer($config['TARGET_WIDTH'],$config['TARGET_HEIGHT'],array('red'=>255,'green'=>255,'blue'=>255));
 resize_recursive($config['SOURCE_DIR'],$rs, $config);
+echo 'Ended at '.date('Y-m-d H:i:s')."\n";
