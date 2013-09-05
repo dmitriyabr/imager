@@ -48,6 +48,8 @@ class Picture {
             if($save_mtime) {
                 if(touch($whole_path, $this->mtime)) {
                     echo " (mtime changed)";
+                    exec("rsync -akvR /data4/./2/0/2010_11_05_00015690_1.jpg resize01.local::retargeting/", $devnull);
+                    exec("rsync -akvR /data4/./2/0/2010_11_05_00015690_1.jpg resize03.local::retargeting/", $devnull);
                 } else {
                     echo " (mtime ERROR)";
                 }
