@@ -47,9 +47,16 @@ class Picture {
             echo 'Saved to ', $whole_path;
             if($save_mtime) {
                 if(touch($whole_path, $this->mtime)) {
-                    echo " (mtime changed)";
-                    exec("rsync -akvR /data4/./2/0/2010_11_05_00015690_1.jpg resize01.local::retargeting/", $devnull);
-                    exec("rsync -akvR /data4/./2/0/2010_11_05_00015690_1.jpg resize03.local::retargeting/", $devnull);
+                    echo " (mtime changed).\n--> Synch log1:";
+                    exec("rsync -akvR /data4/./2/0/2010_11_05_00015690_1.jpg resize01.local::retargeting/", $res01);
+                    exec("rsync -akvR /data4/./2/0/2010_11_05_00015690_1.jpg resize03.local::retargeting/", $res03);
+                    foreach($res01 as $log_line) {
+                        echo "\n--> ", $log_line;
+                    }
+                    echo "\n --> Sench log3:";
+                    foreach($res03 as $log_line) {
+                        echo "\n--> ", $log_line;
+                    }
                 } else {
                     echo " (mtime ERROR)";
                 }
